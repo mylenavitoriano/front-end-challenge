@@ -1,5 +1,6 @@
 import { CardProduct } from "@/components/CardProduct";
 import { Navbar } from "@/components/NavBar";
+import { Sidebar } from "@/components/Sidebar";
 import { Container, HomeStyle } from "@/styles/homeStyle";
 import axios from "axios";
 import { useEffect, useState } from "react"
@@ -21,7 +22,8 @@ export default function Home() {
 
   const [products, setProducts] = useState<Products>([])
   const url = "https://mks-challenge-api-frontend.herokuapp.com/api/v1/products?page=1&rows=10&sortBy=name&orderBy=ASC"
-  const [countItemsShoppingCart, setCountItemsShoppingCart] = useState(0)
+  const [itemsShoppingCart, setItemsShoppingCart] = useState<Products>([])
+  const [sidebar, setSidebar] = useState(false)
 
   useEffect(() => {
     axios.get(url) 
@@ -29,13 +31,19 @@ export default function Home() {
       .catch((error) => {console.log(error)});
   }, [])
 
-  function addShoppingCart(){
-    setCountItemsShoppingCart(countItemsShoppingCart + 1)
+  function addShoppingCart(product: Product){
+    setItemsShoppingCart(array => [...array, product])
+    console.log(itemsShoppingCart)
+  }
+
+  function handleSidebar(){
+    setSidebar(!sidebar)
   }
 
   return (
     <>
-      <Navbar countItemsShoppingCart={countItemsShoppingCart} />
+      <Navbar countItemsShoppingCart={itemsShoppingCart.length} handleSidebar={handleSidebar} />
+      <Sidebar listProducts={itemsShoppingCart} open={true} handleSidebar={handleSidebar} sidebar={sidebar}/>
 
       <HomeStyle>
         <Container>

@@ -29,7 +29,7 @@ export function CardProduct({ product, addShoppingCart }: Props){
 
             <p className="description">{product.description}</p>
 
-            <button onClick={() => addShoppingCart()}>
+            <button onClick={() => addShoppingCart(product)}>
                 <FiShoppingBag size={16}/>
                 Comprar
             </button>

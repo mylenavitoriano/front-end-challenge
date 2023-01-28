@@ -38,5 +38,7 @@ export const NavBar = styled.nav`
         align-items: center;
         justify-content: space-between;
         gap: .875rem;
+
+        cursor: pointer;
     }
 `
