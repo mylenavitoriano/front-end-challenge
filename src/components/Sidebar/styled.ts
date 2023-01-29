@@ -57,7 +57,7 @@ export const Container = styled.div`
     .listProducts{
         position: absolute;
         top: 8.125rem;
-        right: 3.125rem;
+        right: 2rem;
         display: flex;
         flex-direction: column;
         padding: 1rem;
@@ -126,6 +126,7 @@ export const ItemShoppingCart = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: .5rem;
     position: relative;
 
     .removeItem{
