@@ -12,9 +12,10 @@ export const Container = styled.div`
     .listCards{
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         flex-wrap: wrap;
         row-gap: 2rem;
+        column-gap: .5rem;
         margin-top: 7.25rem;
     }
 `

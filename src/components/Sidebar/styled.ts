@@ -11,15 +11,26 @@ export const SidebarStyled = styled.div<SidebarProps>`
     z-index: 999;
     width: 30.375rem;
     height: 100%;
+    max-height: 100vh;
     background-color: #0F52BA;
     box-shadow: -5px 0px 6px rgba(0, 0, 0, 0.13);
-    padding: 2.25rem 3.125rem 0;
     display: ${(props) => props.display ? 'block' : 'none'};
+`
+
+export const Container = styled.div`
+    position: relative;
+    height: 100%;
 
     .header{
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
+        padding: 0 3.125rem 0;
+        position: absolute;
+        top: 2rem;
+        right: 0;
+        z-index: 9999;
+        width: 100%;
 
         h1{
             font-family: 'Montserrat';
@@ -44,12 +55,66 @@ export const SidebarStyled = styled.div<SidebarProps>`
     }
 
     .listProducts{
-        margin-top: 4rem;
+        position: absolute;
+        top: 8.125rem;
+        right: 3.125rem;
         display: flex;
         flex-direction: column;
-        gap: 1.375rem;
+        padding: 1rem;
+        gap: 1rem;
+        max-height: 20.625rem;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: #0F52BA;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #FFF;
+            border-radius: 20px;
+            border: 1px solid #FFF;  
+        }
     }
 
+    .footer{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        z-index: 9999;
+        background-color: #0F52BA;
+
+        .amount{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 3.125rem;
+
+            h1, span{
+                font-weight: 700;
+                font-size: 1.75rem;
+                color: #FFF;
+            }
+        }
+
+        .buttonCheckout{
+            width: 100%;
+            border: 0;
+            height: 5rem;
+            background-color: #000;
+            margin-top: 2rem;
+
+            font-size: 1.75rem;
+            color: #FFF;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+    }
 `
 
 export const ItemShoppingCart = styled.div`
