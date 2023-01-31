@@ -24,7 +24,6 @@ interface ListItemShoppingCart extends Array<ItemShoppingCart>{}
 export function Sidebar(props: any){
 
     const [listProducts, setListProduct] = useState<ListItemShoppingCart>(props.listProducts)
-    const [amount, setAmount] = useState(0)
 
     useEffect(() => {
         setListProduct(props.listProducts)
@@ -33,13 +32,6 @@ export function Sidebar(props: any){
     useEffect(() => {
         setListProduct(props.listProducts)
     }, [])
-
-    // useEffect(() => {
-    //     listProducts.map(item => {
-    //         console.log(parseInt(item.product.price), item.qtd, amount)
-    //         setAmount(amount + ((parseInt(item.product.price) * item.qtd)))
-    //     })
-    // }, [listProducts])
 
     // Finalizar processo de soma do carrinho
 
@@ -69,7 +61,7 @@ export function Sidebar(props: any){
 
                                     <div className="groupButtons">
                                         <button onClick={() => props.changeQtdItem(item, "subtract")}>-</button>
-                                        <input type="text" value={item.qtd}/>
+                                        <input type="text" value={item.qtd} />
                                         <button onClick={() => props.changeQtdItem(item, "add")}>+</button>
                                     </div>
                                 </div>
@@ -83,10 +75,10 @@ export function Sidebar(props: any){
                 <div className="footer">
                     <div className="amount">
                         <h1>Total:</h1>
-                        <span>R$ {amount}</span>
+                        <span>R$ {props.amount}</span>
                     </div>
 
-                    <button className="buttonCheckout" onClick={() => {props.checkout(); setAmount(0)}}>Finalizar Compra</button>
+                    <button className="buttonCheckout" onClick={() => {props.checkout()}}>Finalizar Compra</button>
                 </div>
             </Container>
         </SidebarStyled>

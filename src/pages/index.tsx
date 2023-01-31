@@ -30,13 +30,24 @@ export default function Home() {
   const url = "https://mks-challenge-api-frontend.herokuapp.com/api/v1/products?page=1&rows=10&sortBy=name&orderBy=ASC"
   const [itemsShoppingCart, setItemsShoppingCart] = useState<ListItemShoppingCart>([])
   const [sidebar, setSidebar] = useState(false)
+  const [amount, setAmount] = useState(0)
+  const [operator, setOperator] = useState("")
+
 
   useEffect(() => {
     axios.get(url) 
       .then((response) => setProducts(response.data.products))
       .catch((error) => {console.log(error)});
   }, [])
+  
+  function addAmount(price: number){
+    setAmount(amount + price)
+  }
 
+  function subtractAmount(price: number){
+    setAmount(amount - price)
+  }
+  
   function addShoppingCart(product: Product){
     const copyItems = [...itemsShoppingCart]
 
@@ -52,6 +63,7 @@ export default function Home() {
     }
 
     setItemsShoppingCart(copyItems)
+    addAmount(parseInt(product.price))
   }
 
   function changeQtdItem(productItem: ItemShoppingCart, operation: string){
@@ -62,8 +74,10 @@ export default function Home() {
     if(item){
         if(operation === "add"){
             item.qtd = item.qtd + 1
+            addAmount(parseInt(productItem.product.price))
         }else if(operation === "subtract"){
             item.qtd = item.qtd - 1
+            subtractAmount(parseInt(productItem.product.price))
         }
 
         if(item.qtd === 0){
@@ -78,12 +92,14 @@ export default function Home() {
     const copyItems = [...itemsShoppingCart]
 
     let item = copyItems.find((item) => item.product.id === productItem.product.id)
+    subtractAmount(parseInt(productItem.product.price) * productItem.qtd)
 
     if(item){
       copyItems.splice(copyItems.indexOf(item), 1);
     }
 
     setItemsShoppingCart(copyItems)
+    setOperator("subtract")
   }
 
   function handleSidebar(){
@@ -92,14 +108,15 @@ export default function Home() {
 
   function checkout(){
     setItemsShoppingCart([])
+    setAmount(0)
   }
 
   return (
     <>
       <Navbar countItemsShoppingCart={itemsShoppingCart.length} handleSidebar={handleSidebar} />
-      <Sidebar listProducts={itemsShoppingCart} open={true} handleSidebar={handleSidebar} sidebar={sidebar} changeQtdItem={changeQtdItem} removeItem={removeItem} checkout={checkout}/>
+      <Sidebar listProducts={itemsShoppingCart} open={true} handleSidebar={handleSidebar} sidebar={sidebar} changeQtdItem={changeQtdItem} removeItem={removeItem} checkout={checkout} amount={amount} subtractAmount={subtractAmount}/>
 
-      <HomeStyle>
+      <HomeStyle onClick={() => setSidebar(false)}>
         <Container>
           <section className="listCards">
             {products.map(item => (

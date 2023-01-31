@@ -62,8 +62,12 @@ export const Container = styled.div`
         flex-direction: column;
         padding: 1rem;
         gap: 1rem;
-        max-height: 20.625rem;
+        max-height: 28rem;
         overflow-y: scroll;
+
+        @media (max-height: 650px) {
+            max-height: 20.625rem;
+        }
 
         &::-webkit-scrollbar {
             width: 12px;
