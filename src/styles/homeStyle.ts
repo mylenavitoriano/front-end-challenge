@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const HomeStyle = styled.main`
     padding: 6.25rem 0 10.625rem;
+    background: #FFF;
 `
 
 export const Container = styled.div`
