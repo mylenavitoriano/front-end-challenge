@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HomeStyle = styled.main`
-    padding: 6.25rem 0 10.625rem;
+    padding: 6.25rem 0 6.625rem;
     background: #FFF;
 `
 
@@ -18,5 +18,17 @@ export const Container = styled.div`
         row-gap: 2rem;
         column-gap: .5rem;
         margin-top: 7.25rem;
+    }
+`
+
+export const Footer = styled.footer`
+    background-color: #EEEEEE;
+    width: 100%;
+    padding: .5rem 0;
+    
+    p{
+        font-size: .75rem;
+        color: #000;
+        text-align: center;
     }
 `

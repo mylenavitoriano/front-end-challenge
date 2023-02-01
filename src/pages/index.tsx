@@ -1,9 +1,12 @@
 import { CardProduct } from "@/components/CardProduct";
 import { Navbar } from "@/components/NavBar";
 import { Sidebar } from "@/components/Sidebar";
-import { Container, HomeStyle } from "@/styles/homeStyle";
+import { Container, Footer, HomeStyle } from "@/styles/homeStyle";
 import axios from "axios";
 import { useEffect, useState } from "react"
+
+import Stack from '@mui/material/Stack'; 
+import Skeleton from '@mui/material/Skeleton';
 
 export default function Home() {
 
@@ -31,14 +34,21 @@ export default function Home() {
   const [itemsShoppingCart, setItemsShoppingCart] = useState<ListItemShoppingCart>([])
   const [sidebar, setSidebar] = useState(false)
   const [amount, setAmount] = useState(0)
-  const [operator, setOperator] = useState("")
+  const [loading, setLoading] = useState(true)
 
 
   useEffect(() => {
-    axios.get(url) 
-      .then((response) => setProducts(response.data.products))
-      .catch((error) => {console.log(error)});
+    setTimeout(() => {
+      axios.get(url) 
+        .then((response) => {setProducts(response.data.products), setLoading(false)})
+        .catch((error) => {console.log(error)});
+    }, 3000)
   }, [])
+
+  useEffect(() => {
+    console.log(loading)
+
+  }), [loading]
   
   function addAmount(price: number){
     setAmount(amount + price)
@@ -99,7 +109,6 @@ export default function Home() {
     }
 
     setItemsShoppingCart(copyItems)
-    setOperator("subtract")
   }
 
   function handleSidebar(){
@@ -116,15 +125,27 @@ export default function Home() {
       <Navbar countItemsShoppingCart={itemsShoppingCart.length} handleSidebar={handleSidebar} />
       <Sidebar listProducts={itemsShoppingCart} open={true} handleSidebar={handleSidebar} sidebar={sidebar} changeQtdItem={changeQtdItem} removeItem={removeItem} checkout={checkout} amount={amount} subtractAmount={subtractAmount}/>
 
-      <HomeStyle onClick={() => setSidebar(false)}>
-        <Container>
-          <section className="listCards">
-            {products.map(item => (
-              <CardProduct product={item} addShoppingCart={addShoppingCart} key={item.id}/>
-            ))}
-          </section>
-        </Container>
-      </HomeStyle>
+      <Stack spacing={1}>
+        <HomeStyle onClick={() => setSidebar(false)}>
+          <Container>
+            <section className="listCards">
+              {loading && Array.from({ length: 8 }).map((_, i) => (
+                  <Skeleton variant="rectangular" width={224} height={300}></Skeleton>
+                ))
+              }
+
+              {!loading && products.map(item => (
+                  <CardProduct product={item} addShoppingCart={addShoppingCart} key={item.id} />
+                ))
+              }
+            </section>
+          </Container>
+        </HomeStyle>
+      </Stack>
+
+      <Footer>
+          <p>MKS sistemas © Todos os direitos reservados</p>
+      </Footer>
     </>
   )
 }
