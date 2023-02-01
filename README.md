@@ -29,11 +29,12 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - Next.js
 - Typescript
 - Styled-component
-- Axios
+- Axios (consumo de API's)
 
 ## 💻 Projeto
 
-No Projeto e-Commerce é listado produtos e tem como funcionalidade adicioná-los no "Carrinho de Compras" visualizando os items adicionado, a quantidade, o valor e por fim o valor final da sua compra.
+No Projeto e-Commerce, é proporcionado ao usuário uma listagem de produtos (fictícios) e possibilita que ele adicione-os ao carrinho, aumente a quantidade do mesmo e após feito todos esses processos, é possível ver o valor final de sua compra.
+Para esse projeto eu consumi uma API fictícia de produtos, com ela eu obtive retorno de dados como o nome, a descrição, imagem e preço. Após o consumo dessa API foi feita a listagem para o usuário, como um e-Commerce.
 
 - [Acesse o projeto finalizado, online](https://front-end-challenge-indol.vercel.app/)
 
