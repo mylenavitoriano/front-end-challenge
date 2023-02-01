@@ -35,7 +35,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 No Projeto e-Commerce é listado produtos e tem como funcionalidade adicioná-los no "Carrinho de Compras" visualizando os items adicionado, a quantidade, o valor e por fim o valor final da sua compra.
 
-<!-- - [Acesse o projeto finalizado, online](https://habits-explorer-mu.vercel.app/) -->
+- [Acesse o projeto finalizado, online](https://front-end-challenge-indol.vercel.app/)
 
 
 ## 🔖 Layout
